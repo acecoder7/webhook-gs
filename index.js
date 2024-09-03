@@ -1,30 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const crypto = require('crypto');
 
 const app = express();
 
 app.use(bodyParser.json());
 
 
-function verifyShopifyWebhook(req, res, buf) {
-    const secret = process.env.SHOPIFY_WEBHOOK_SECRET;
-    const hash = crypto
-        .createHmac('sha256', secret)
-        .update(buf)
-        .digest('base64');
+// function verifyShopifyWebhook(req, res, buf) {
+//     const secret = process.env.SHOPIFY_WEBHOOK_SECRET;
+//     const hash = crypto
+//         .createHmac('sha256', secret)
+//         .update(buf)
+//         .digest('base64');
     
-    const hmac = req.get('X-Shopify-Hmac-Sha256');
-    if (hash !== hmac) {
-        throw new Error('Webhook verification failed');
-    }
-}
+//     const hmac = req.get('X-Shopify-Hmac-Sha256');
+//     if (hash !== hmac) {
+//         throw new Error('Webhook verification failed');
+//     }
+// }
 
 // order creation
 app.post('/webhook/order-created', (req, res) => {
     try {
-        console.log("enter");
-        console.log('Order Created:', req.body);
+        console.log('Order Created  :', req.body);
+        console.log("exit");
+        console.log("exit");
         res.status(200).send('Order Created Webhook received');
     } catch (error) {
         console.error('Error processing order creation webhook:', error);
@@ -35,7 +35,9 @@ app.post('/webhook/order-created', (req, res) => {
 // order updates
 app.post('/webhook/order-updated', (req, res) => {
     try {
-        console.log('Order Updated:', req.body);
+        console.log('Order Updated  :', req.body);
+        console.log("exit");
+        console.log("exit");
         res.status(200).send('Order Updated Webhook received');
     } catch (error) {
         console.error('Error processing order update webhook:', error);
@@ -46,7 +48,9 @@ app.post('/webhook/order-updated', (req, res) => {
 // fulfillment creation
 app.post('/webhook/fulfillment-created', (req, res) => {
     try {
-        console.log('Fulfillment Created:', req.body);
+        console.log('Fulfillment Created  :', req.body);
+        console.log("exit");
+        console.log("exit");
         res.status(200).send('Fulfillment Created Webhook received');
     } catch (error) {
         console.error('Error processing fulfillment creation webhook:', error);
@@ -57,7 +61,9 @@ app.post('/webhook/fulfillment-created', (req, res) => {
 // fulfillment updates
 app.post('/webhook/fulfillment-updated', (req, res) => {
     try {
-        console.log('Fulfillment Updated:', req.body);
+        console.log('Fulfillment Updated  :', req.body);
+        console.log("exit");
+        console.log("exit");
         res.status(200).send('Fulfillment Updated Webhook received');
     } catch (error) {
         console.error('Error processing fulfillment update webhook:', error);
